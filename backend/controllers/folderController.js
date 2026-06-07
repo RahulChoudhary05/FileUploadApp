@@ -1,6 +1,25 @@
 import Folder from '../models/Folder.js';
 import Image from '../models/Image.js';
-import { getFolderAndDescendantIds, refreshFolderSizeCascade } from '../utils/folderSize.js';
+import {
+  calculateFolderSize,
+  getFolderAndDescendantIds,
+  refreshFolderSizeCascade,
+} from '../utils/folderSize.js';
+import { ensureDefaultFolders } from '../utils/ensureDefaultFolders.js';
+
+export const setupDefaultFolders = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const { hello, subHello } = await ensureDefaultFolders(userId);
+    res.status(200).json({
+      hello,
+      subHello,
+      message: 'Default folders ready',
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
 
 export const createFolder = async (req, res) => {
   try {
@@ -44,6 +63,17 @@ export const getFolders = async (req, res) => {
     }
 
     const folders = await Folder.find(query).sort({ createdAt: -1, name: 1 });
+
+    await Promise.all(
+      folders.map(async (folder) => {
+        const totalSize = await calculateFolderSize(userId, folder._id.toString());
+        if (folder.size !== totalSize) {
+          folder.size = totalSize;
+          await Folder.updateOne({ _id: folder._id, userId }, { size: totalSize });
+        }
+      })
+    );
+
     res.status(200).json(folders);
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });

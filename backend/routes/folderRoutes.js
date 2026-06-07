@@ -6,6 +6,7 @@ import {
   updateFolder,
   deleteFolder,
   getFolderPath,
+  setupDefaultFolders,
 } from '../controllers/folderController.js';
 import { verifyToken } from '../middleware/auth.js';
 
@@ -14,6 +15,7 @@ const router = express.Router();
 router.use(verifyToken);
 
 router.post('/', createFolder);
+router.post('/setup-defaults', setupDefaultFolders);
 router.get('/', getFolders);
 router.get('/:folderId', getFolderById);
 router.put('/:folderId', updateFolder);
