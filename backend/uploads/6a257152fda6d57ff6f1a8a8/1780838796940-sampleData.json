@@ -1,0 +1,34 @@
+{
+  "company": "TechCorp",
+  "establishment_year": 2026,
+  "active": true,
+  "revenue": 1250000.50,
+  "departments": [
+    "Engineering",
+    "Marketing",
+    "Sales"
+  ],
+  "headquarters": {
+    "city": "San Francisco",
+    "state": "CA",
+    "zip_code": "94105",
+    "country": "USA"
+  },
+  "employees": [
+    {
+      "id": 101,
+      "name": "Alice Johnson",
+      "role": "Senior Developer",
+      "remote": true,
+      "skills": ["JavaScript", "React", "Node.js"]
+    },
+    {
+      "id": 102,
+      "name": "Bob Smith",
+      "role": "Product Manager",
+      "remote": false,
+      "skills": ["Agile", "User Research", "Roadmapping"]
+    }
+  ],
+  "ceo": null
+}

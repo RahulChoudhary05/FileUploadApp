@@ -1,0 +1,42 @@
+# Dependency directories (never commit third-party packages)
+node_modules/
+jspm_packages/
+.venv/
+venv/
+env/
+
+# Build and environment outputs
+dist/
+build/
+out/
+*.exe
+*.dll
+*.so
+
+# Environment variables and credentials (security risk)
+.env
+.env.local
+.env.development.local
+*.pem
+*.key
+
+# Operating system files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# IDEs and Code Editors
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Logs and runtime databases
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.db
+*.sqlite
