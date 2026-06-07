@@ -7,6 +7,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
+    "build": "echo 'Backend is ready to run with npm start or npm run dev'",
     "check:cloudinary": "node scripts/check-cloudinary.js"
   },
   "keywords": [

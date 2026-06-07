@@ -17,6 +17,32 @@ const ALLOWED_DOCUMENT_MIMETYPES = new Set([
   'application/xml',
   'application/javascript',
   'text/markdown',
+  'application/pdf',
+  'application/msword',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  'application/vnd.ms-excel',
+  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  'application/rtf',
+  'text/xml',
+  'application/xml',
+]);
+
+const ALLOWED_DOCUMENT_EXTENSIONS = new Set([
+  '.txt',
+  '.csv',
+  '.json',
+  '.html',
+  '.htm',
+  '.xml',
+  '.js',
+  '.md',
+  '.markdown',
+  '.pdf',
+  '.doc',
+  '.docx',
+  '.xls',
+  '.xlsx',
+  '.rtf',
 ]);
 
 export const isAllowedUpload = (file) => {
@@ -27,7 +53,7 @@ export const isAllowedUpload = (file) => {
     return true;
   }
 
-  if (ALLOWED_DOCUMENT_MIMETYPES.has(mimetype) || mimetype.startsWith('text/')) {
+  if (ALLOWED_DOCUMENT_MIMETYPES.has(mimetype) || ALLOWED_DOCUMENT_EXTENSIONS.has(extension) || mimetype.startsWith('text/')) {
     return true;
   }
 
@@ -35,7 +61,7 @@ export const isAllowedUpload = (file) => {
 };
 
 export const uploadValidationMessage =
-  'Allowed uploads: images (PNG, JPG, SVG) and text-based files (txt, csv, json, html, md, js, xml).';
+  'Allowed uploads: images (PNG, JPG, SVG) and documents (TXT, CSV, JSON, HTML, MD, JS, XML, PDF, DOC, DOCX, XLS, XLSX, RTF).';
 
 export const isImageUpload = (file) => {
   const extension = path.extname(file.originalname || '').toLowerCase();
